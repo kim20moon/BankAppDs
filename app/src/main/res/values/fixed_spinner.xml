@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string-array name="category_type">
+        <item>분류</item>
+        <item>식비</item>
+        <item>금융</item>
+        <item>쇼핑</item>
+        <item>여가</item>
+        <item>취미</item>
+        <item>건강</item>
+        <item>주거</item>
+        <item>기타</item>
+    </string-array>
+
+</resources>

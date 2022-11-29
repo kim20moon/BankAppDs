@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "527168938388",
+    "project_id": "bankappds-e295b",
+    "storage_bucket": "bankappds-e295b.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:527168938388:android:4a1ed0573b00b99118ef81",
+        "android_client_info": {
+          "package_name": "com.example.bankappds"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "527168938388-0javpnr2ahe3msuhld40njv7v9q9bive.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAeHqjJWIzNi3N3xbNUB4Pa-06eZXQOpBw"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "527168938388-0javpnr2ahe3msuhld40njv7v9q9bive.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

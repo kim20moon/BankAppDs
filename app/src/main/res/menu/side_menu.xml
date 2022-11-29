@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <item
+        android:id="@+id/mainFragment"
+        android:icon="@drawable/ic_baseline_home_24"
+        android:title="메인 화면" />
+    <item
+        android:id="@+id/monthListFragment"
+        android:title="이번달 지출 목록" />
+    <item
+        android:id="@+id/goalFragment"
+        android:title="목표금액" />
+    <item
+        android:id="@+id/regFragment"
+        android:title="고정지출" />
+    <item
+        android:id="@+id/barChart"
+        android:title="통계" />
+    <item
+        android:id="@+id/searchFragment"
+        android:title="검색" />
+    <item
+        android:id="@+id/rankingFragment"
+        android:title="순위" />
+    <item
+        android:id="@+id/loginLogoutActivity"
+        android:title="로그아웃" />
+</menu>

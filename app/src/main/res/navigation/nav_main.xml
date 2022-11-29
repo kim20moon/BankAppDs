@@ -1,0 +1,128 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/nav_main"
+    app:startDestination="@id/mainFragment">
+
+    <fragment
+        android:id="@+id/mainFragment"
+        android:name="com.example.bankappds.MainFragment"
+        android:label="가계부 어플"
+        tools:layout="@layout/fragment_main">
+        <action
+            android:id="@+id/action_mainFragment_to_goalFragment"
+            app:destination="@id/goalFragment" />
+        <action
+            android:id="@+id/action_mainFragment_to_regFragment"
+            app:destination="@id/regFragment" />
+        <action
+            android:id="@+id/action_mainFragment_to_mainInputFragment"
+            app:destination="@id/mainInputFragment" />
+        <action
+            android:id="@+id/action_mainFragment_to_barChart2"
+            app:destination="@id/barChart" />
+        <action
+            android:id="@+id/action_mainFragment_to_searchFragment"
+            app:destination="@id/searchFragment" />
+        <argument
+            android:name="expenditureData"
+            android:defaultValue="@null"
+            app:argType="com.example.bankappds.Expenditure"
+            app:nullable="true" />
+        <action
+            android:id="@+id/action_mainFragment_to_monthListFragment"
+            app:destination="@id/monthListFragment" />
+        <action
+            android:id="@+id/action_mainFragment_to_loginLogoutActivity"
+            app:destination="@id/loginLogoutActivity" />
+        <action
+            android:id="@+id/action_mainFragment_to_rankingFragment"
+            app:destination="@id/rankingFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/goalFragment"
+        android:name="com.example.bankappds.GoalFragment"
+        android:label="목표 지출 금액 설정"
+        tools:layout="@layout/fragment_goal" />
+    <fragment
+        android:id="@+id/regFragment"
+        android:name="com.example.bankappds.RegFragment"
+        android:label="정기 지출 목록"
+        tools:layout="@layout/fragment_reg">
+        <action
+            android:id="@+id/action_regFragment_to_regInputFragment"
+            app:destination="@id/regInputFragment" />
+        <argument
+            android:name="regExpenditure"
+            android:defaultValue="@null"
+            app:argType="com.example.bankappds.Expenditure"
+            app:nullable="true" />
+    </fragment>
+    <fragment
+        android:id="@+id/regInputFragment"
+        android:name="com.example.bankappds.RegInputFragment"
+        android:label="정기지출 입력창"
+        tools:layout="@layout/fragment_reg_input">
+        <action
+            android:id="@+id/action_regInputFragment_to_regFragment"
+            app:destination="@id/regFragment"
+            app:popUpTo="@id/regFragment"
+            app:popUpToInclusive="true" />
+    </fragment>
+    <fragment
+        android:id="@+id/mainInputFragment"
+        android:name="com.example.bankappds.MainInputFragment"
+        android:label="일일 지출 입력창"
+        tools:layout="@layout/fragment_main_input">
+        <action
+            android:id="@+id/action_mainInputFragment_to_mainFragment"
+            app:destination="@id/mainFragment" />
+        <argument
+            android:name="calendarDate"
+            app:argType="integer[]" />
+    </fragment>
+    <fragment
+        android:id="@+id/barChart"
+        android:name="com.example.bankappds.BarChart"
+        android:label="BarChart" >
+        <action
+            android:id="@+id/action_barChart_to_circleChart"
+            app:destination="@id/circleChart"
+            app:popUpTo="@id/mainFragment"
+            app:popUpToInclusive="true" />
+    </fragment>
+    <fragment
+        android:id="@+id/circleChart"
+        android:name="com.example.bankappds.CircleChart"
+        android:label="CircleChart" >
+        <action
+            android:id="@+id/action_circleChart_to_barChart"
+            app:destination="@id/barChart"
+            app:popUpTo="@id/mainFragment"
+            app:popUpToInclusive="true" />
+    </fragment>
+    <fragment
+        android:id="@+id/searchFragment"
+        android:name="com.example.bankappds.SearchFragment"
+        android:label="SearchFragment" />
+    <fragment
+        android:id="@+id/monthListFragment"
+        android:name="com.example.bankappds.MonthListFragment"
+        android:label="이번달 지출 목록"
+        tools:layout="@layout/fragment_month_list" />
+    <activity
+        android:id="@+id/loginLogoutActivity"
+        android:name="com.example.bankappds.LoginLogoutActivity"
+        android:label="activity_login_logout"
+        tools:layout="@layout/activity_login_logout" />
+    <fragment
+        android:id="@+id/rankingFragment"
+        android:name="com.example.bankappds.RankingFragment"
+        android:label="fragment_ranking"
+        tools:layout="@layout/fragment_ranking" >
+        <action
+            android:id="@+id/action_rankingFragment_to_mainFragment"
+            app:destination="@id/mainFragment" />
+    </fragment>
+</navigation>

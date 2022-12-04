@@ -31,19 +31,16 @@ class dataViewModel: ViewModel() {
     private val _email = MutableLiveData<String>("")
     val email : LiveData<String> get() = _email
 
-    private val _password = MutableLiveData<String>("")
-    val password : LiveData<String> get() = _password
-
-    private val _personName = MutableLiveData<String> ("")
-    val personName : LiveData<String> get() = _personName
+    private val _name = MutableLiveData<String> ("")
+    val name : LiveData<String> get() = _name
 
     var tempExpdMap: MutableMap<String, MutableList<Expenditure>> = mutableMapOf()
     var tempRegExpdMap: MutableMap<String, MutableList<Expenditure>> = mutableMapOf()
 
     init {
         repository.observeEmail(_email)
-        repository.observePassword(_password)
-        repository.observePersonName(_personName)
+        repository.observeName(_name)
+        repository.observeExpenditureMap(_expenditureMap)
         repository.observeTotalExpense(_totalExpense)
         repository.observeTotalRegExpense(_totalRegExpense)
     }
@@ -59,46 +56,43 @@ class dataViewModel: ViewModel() {
     fun addExpenditure(expd: Expenditure) {
         val dayInfo = makeDayStr(expd.year, expd.month, expd.day)
 
-        if (expenditureMap.value?.get(dayInfo) != null) { // 기존 값 존재
+        if (expenditureMap.value?.get(dayInfo) != null)  // 기존 값 존재
             tempExpdMap[dayInfo]?.add(expd)
-            _expenditureMap.value = tempExpdMap
-            println("Add Expenditure ${_expenditureMap.value}")
-        } else { // 기존 값 존재 X
+        else  // 기존 값 존재 X
             tempExpdMap[dayInfo] = mutableListOf(expd)
-            _expenditureMap.value = tempExpdMap
-            println("Add Expenditure ${_expenditureMap.value}")
-        }
+        
+
+        _expenditureMap.value = tempExpdMap
+        println("Add Expenditure ${_expenditureMap.value}")
+
         _totalExpense.value = _totalExpense.value?.plus(expd.expense)
-        repository.postExpenditureMap(_expenditureMap.value)
+        repository.postExpenditureMap(_email.value ?: "", _expenditureMap.value)
         repository.postTotalExpense(email.value ?: "", _totalExpense.value ?: 0)
     }
 
     fun deleteExpenditure(expd: Expenditure) {
         val dayInfo = makeDayStr(expd.year,expd.month,expd.day)
+
         tempExpdMap[dayInfo]?.remove(expd)
         println("delte ${tempExpdMap.values}")
         _expenditureMap.value = tempExpdMap
         println("Delete Expenditrue ${_expenditureMap.value}")
 
         _totalExpense.value = _totalExpense.value?.minus(expd.expense)
-        repository.postExpenditureMap( _expenditureMap.value)
+        repository.postExpenditureMap( _email.value ?: "", _expenditureMap.value)
         repository.postTotalExpense(email.value ?: "", _totalExpense.value ?: 0)
     }
 
     fun addRegExpenditure(expd: Expenditure){
         val dayInfo = makeDayStr(expd.year, expd.month, expd.day)
 
-        if (regExpdMap.value?.get(dayInfo) != null) { // 기존 값 존재
+        if (regExpdMap.value?.get(dayInfo) != null)  // 기존 값 존재
             tempRegExpdMap[dayInfo]?.add(expd)
-            _regExpdMap.value = tempRegExpdMap
-            println("Add RegExpenditure ${_regExpdMap.value}")
-
-        } else { // 기존 값 존재 X
+         else  // 기존 값 존재 X
             tempRegExpdMap[dayInfo] = mutableListOf(expd)
-            _regExpdMap.value = tempRegExpdMap
-            println("Add RegExpenditure ${_regExpdMap.value}")
 
-        }
+        _regExpdMap.value = tempRegExpdMap
+        println("Add RegExpenditure ${_regExpdMap.value}")
         _totalRegExpense.value = _totalRegExpense.value?.plus(expd.expense)
 
         repository.postRegExpenditureMap( _regExpdMap.value)
@@ -122,15 +116,16 @@ class dataViewModel: ViewModel() {
         repository.postEmail(_email.value ?: "")
     }
 
-    fun plusPersonName(data: String) {
-        _personName.value = data
-        repository.postPersonName(_personName.value ?: "")
+    fun plusName(data: String) {
+        _name.value = data
+        repository.postName(_name.value ?: "")
     }
 
-    fun plusMasterExpense(totalExpenseData: Number, totalRegExpenseData: Number) {
+    fun plusAllExpense(totalExpenseData: Number, totalRegExpenseData: Number) {
         _totalExpense.value = totalExpenseData.toInt()
         _totalRegExpense.value = totalRegExpenseData.toInt()
-        repository.postMasterExpense(_totalExpense.value ?: 0, _totalRegExpense.value ?: 0)
+        repository.postTotalExpense(_email.value ?: "", _totalExpense.value ?: 0)
+        repository.postTotalRegExpense(_email.value ?: "", _totalRegExpense.value ?: 0)
     }
 
 }

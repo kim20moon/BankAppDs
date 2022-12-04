@@ -20,6 +20,7 @@ class MainFragment : Fragment() {
     private var binding : FragmentMainBinding? = null
     private var position = FIRST_POSITION
     val viewModel: dataViewModel by activityViewModels()
+    val db: FirebaseFirestore = FirebaseFirestore.getInstance()
 
     companion object {
         const val FIRST_POSITION = 1
@@ -42,11 +43,9 @@ class MainFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        viewModel.personName.observe(viewLifecycleOwner) {
-            binding?.txtPersonName?.text = viewModel.personName.value?.toString()
+        viewModel.name.observe(viewLifecycleOwner) {
+            binding?.txtPersonName?.text = viewModel.name.value?.toString()
         }
-
-        childFragmentManager.beginTransaction().replace(R.id.frm_fragment, DayCalendarFragment()).commit()
 
         binding?.imgBtnProfile?.setOnClickListener {
             val transaction = childFragmentManager.beginTransaction()

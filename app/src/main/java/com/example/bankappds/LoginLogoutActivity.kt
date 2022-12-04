@@ -43,7 +43,7 @@ class LoginLogoutActivity : AppCompatActivity() {
             // 회원가입에 필요한 이메일, 비밀번호를 불러오기
             val email: String = binding.authEmailEditView.text.toString()
             val password: String = binding.authPasswordEditView.text.toString()
-            val personName: String = binding.authPersonNameEditView.text.toString()
+            val name: String = binding.authPersonNameEditView.text.toString()
 
             // 이메일 인증 과정
             MyApplication.auth.createUserWithEmailAndPassword(email, password)
@@ -63,7 +63,7 @@ class LoginLogoutActivity : AppCompatActivity() {
 
                                     val user = hashMapOf(
                                         "email" to email,
-                                        "personName" to personName,
+                                        "name" to name,
                                         "totalExpense" to 0,
                                         "totalRegExpense" to 0
                                     )
@@ -114,12 +114,13 @@ class LoginLogoutActivity : AppCompatActivity() {
                                 .document(email)
                                 .get()
                                 .addOnSuccessListener { documentSnapshot ->
-                                    val personName: String = documentSnapshot.get("personName") as String
+                                    val name: String = documentSnapshot.get("name") as String
                                     val totalExpense: Number = documentSnapshot.get("totalExpense") as Number
                                     val totalRegExpense: Number = documentSnapshot.get("totalRegExpense") as Number
-                                    viewModel.plusPersonName(personName)
-                                    viewModel.plusMasterExpense(totalExpense, totalRegExpense)
+                                    viewModel.plusName(name)
+                                    viewModel.plusAllExpense(totalExpense, totalRegExpense)
                                 }
+
                             val nextIntent = Intent(this, MainActivity::class.java)
                             startActivity(nextIntent)
                         }

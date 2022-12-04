@@ -13,7 +13,7 @@ class RankingFragment : Fragment() {
     var binding: FragmentRankingBinding? = null
 
     // 첫 화면에서 뜨는 spinner 목록은 이름
-    var searchOption = "personName"
+    var searchOption = "name"
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -37,7 +37,7 @@ class RankingFragment : Fragment() {
                 when (binding?.spinner?.getItemAtPosition(position)) {
                     // 이름으로 선택하면 이름을 검색
                     "이름" -> {
-                        searchOption = "personName"
+                        searchOption = "name"
                     }
                     // 총 일반 지출을 선택하면 총 일반 지출을 검색
                     "총 일반 지출" -> {
